@@ -5,7 +5,7 @@ const port = 4365 ;
 
 
 let nextId = 1;
-const tasks = [{id:0,name:"task 1",description:""}];
+const tasks = [];
 
 app.use(express.json());
 
@@ -21,10 +21,13 @@ app.post("/add",(req,res)=>{
 let id = nextId++;
 let name = req.body.name;
 let description = req.body.description;
-let obj = {id,name,description};
-tasks.push(obj);
-console.log(obj);
-res.json({message:"ok"});
+let task = {id,name,description};
+tasks[id] = task;
+//במערך הזה INDEX תמיד יהיה  ID פה אני בעצם מוודא שה 
+//וככה בעתיד יהיה לי יותר קל למצוא משימה מאשר כל פעם לרוץ על כל המערך
+//זו הדרך המקצועית
+console.log(task);
+res.json({message:"ok the task has added"});
 
 });
 
