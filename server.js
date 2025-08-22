@@ -18,13 +18,12 @@ res.json(tasks);
 });
 
 app.post("/add",(req,res)=>{
-let id = nextId;
+let id = nextId++;
 let name = req.body.name;
 let description = req.body.description;
 let obj = {id,name,description};
 tasks.push(obj);
 console.log(obj);
-nextId++;
 res.json({message:"ok"});
 
 });
