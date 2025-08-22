@@ -45,6 +45,26 @@ tasks[currentId] = null;
 res.json({message:"this item deleted"});
 });
 
+app.get("/get/:id",(req,res)=>{
+    let id = req.params.id;
+    if(tasks[id] == null || id >= tasks.length){
+        return res.json({message:"id is not valid"});
+    }
+    res.json(tasks[id]);
+});
+
+app.patch("/update",(req,res)=>{
+    let id = req.body.id;
+    if(tasks[id] == null || id >= tasks.length){
+        return res.json({message:"id is not valid"});
+    }
+    let name = req.body.name;
+    let description = req.body.description;
+    tasks[id].name = name;
+    tasks[id].description = description;
+    res.json({message:`item ${id} updated`});
+});
+
 
 
 
