@@ -25,7 +25,8 @@ app.post("/add",(req,res)=>{
         
         let id = nextId++;
         let description = req.body.description;
-        let task = {id,name,description};
+        let isDone = false;
+        let task = {id,name,description,isDone};
         tasks[id] = task;
         //במערך הזה INDEX תמיד יהיה  ID פה אני בעצם מוודא שה 
         //וככה בעתיד יהיה לי יותר קל למצוא משימה מאשר כל פעם לרוץ על כל המערך
@@ -58,12 +59,23 @@ app.patch("/update",(req,res)=>{
     if(tasks[id] == null || id >= tasks.length){
         return res.json({message:"id is not valid"});
     }
+    //פה אני בעצם מקבל מהצד לקוח משתנה בוליאני ועל פיו אני משנה והוא 
+    // יכול להיות לא מוגדר רק אם הוא לא שלח לי כלום ולכן אני לא יעשה כלום
+    let isDone = req.body.isDone;
+    if(isDone != undefined){
+        tasks[id].isDone = isDone;
+    }
     let name = req.body.name;
+    if(name){
+        tasks[id].name = name;
+    }
     let description = req.body.description;
-    tasks[id].name = name;
-    tasks[id].description = description;
+    if(description){
+        tasks[id].description = description;
+    }
     res.json({message:`item ${id} updated`});
 });
+
 
 
 
