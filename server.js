@@ -18,16 +18,21 @@ res.json(tasks);
 });
 
 app.post("/add",(req,res)=>{
-let id = nextId++;
-let name = req.body.name;
-let description = req.body.description;
-let task = {id,name,description};
-tasks[id] = task;
-//במערך הזה INDEX תמיד יהיה  ID פה אני בעצם מוודא שה 
-//וככה בעתיד יהיה לי יותר קל למצוא משימה מאשר כל פעם לרוץ על כל המערך
-//זו הדרך המקצועית
-console.log(task);
-res.json({message:"ok the task has added"});
+    let name = req.body.name;
+    if(!name){
+        res.json({message:"please enter a valid text"});
+    }else{
+        
+        let id = nextId++;
+        let description = req.body.description;
+        let task = {id,name,description};
+        tasks[id] = task;
+        //במערך הזה INDEX תמיד יהיה  ID פה אני בעצם מוודא שה 
+        //וככה בעתיד יהיה לי יותר קל למצוא משימה מאשר כל פעם לרוץ על כל המערך
+        //זו הדרך המקצועית
+        console.log(task);
+        res.json({message:"ok the task has added"});
+    }
 
 });
 
