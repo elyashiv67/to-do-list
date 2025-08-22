@@ -3,7 +3,9 @@ const app = express();
 const port = 4365 ;
 
 
-const tasks = [{id:1,name:"task 1"}];
+
+let nextId = 1;
+const tasks = [{id:0,name:"task 1"}];
 
 app.use(express.json());
 
@@ -13,6 +15,17 @@ app.get('/',(req,res)=>{
 
 app.get("/arr",(req,res)=>{
 res.json(tasks);
+});
+
+app.post("/add",(req,res)=>{
+let id = nextId;
+let name = req.body.name;
+let obj = {id,name};
+tasks.push(obj);
+console.log(obj);
+nextId++;
+res.json({message:"ok"});
+
 });
 
 
