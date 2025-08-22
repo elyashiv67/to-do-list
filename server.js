@@ -5,7 +5,7 @@ const port = 4365 ;
 
 
 let nextId = 1;
-const tasks = [{id:0,name:"task 1"}];
+const tasks = [{id:0,name:"task 1",description:""}];
 
 app.use(express.json());
 
@@ -20,7 +20,8 @@ res.json(tasks);
 app.post("/add",(req,res)=>{
 let id = nextId;
 let name = req.body.name;
-let obj = {id,name};
+let description = req.body.description;
+let obj = {id,name,description};
 tasks.push(obj);
 console.log(obj);
 nextId++;
