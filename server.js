@@ -20,8 +20,8 @@ res.json(tasks);
 app.post("/add",(req,res)=>{
     let name = req.body.name;
     if(!name){
-        res.json({message:"please enter a valid text"});
-    }else{
+       return res.json({message:"please enter a valid text"});
+    }
         
         let id = nextId++;
         let description = req.body.description;
@@ -32,8 +32,17 @@ app.post("/add",(req,res)=>{
         //זו הדרך המקצועית
         console.log(task);
         res.json({message:"ok the task has added"});
-    }
+    
 
+});
+
+app.delete("/delete",(req,res)=>{
+    let currentId = req.body.id;
+    if(tasks[currentId] == null || currentId >= tasks.length){
+        return res.json({message:"id is not valid"});
+    }
+tasks[currentId] = null;
+res.json({message:"this item deleted"});
 });
 
 
