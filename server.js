@@ -1,16 +1,14 @@
 const express = require('express');
 const app = express();
 const port = 4365 ;
-
+const path = require('path');
+app.use(express.static(path.join(__dirname)));
+app.use(express.json());
 
 
 let nextId = 1;
 const tasks = [];
 
-app.use(express.static(__dirname));
-
-
-app.use(express.json());
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname + '/index.html');
@@ -21,16 +19,16 @@ res.json(tasks);
 });
 
 app.post("/add",(req,res)=>{
-    let name = req.body.name;
-    if(!name){
+    let task = req.body.task;
+    if(!task){
        return res.json({message:"please enter a valid text"});
     }
         
         let id = nextId++;
         let description = req.body.description;
         let isDone = false;
-        let task = {id,name,description,isDone};
-        tasks[id] = task;
+        let obj = {id,task,description,isDone};
+        tasks[id] = obj;
         //במערך הזה INDEX תמיד יהיה  ID פה אני בעצם מוודא שה 
         //וככה בעתיד יהיה לי יותר קל למצוא משימה מאשר כל פעם לרוץ על כל המערך
         //זו הדרך המקצועית
@@ -68,9 +66,9 @@ app.patch("/update",(req,res)=>{
     if(isDone != undefined){
         tasks[id].isDone = isDone;
     }
-    let name = req.body.name;
-    if(name){
-        tasks[id].name = name;
+    let task = req.body.task;
+    if(task){
+        tasks[id].task = task;
     }
     let description = req.body.description;
     if(description){

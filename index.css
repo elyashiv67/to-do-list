@@ -1,61 +1,86 @@
-/* Reset some default styles */
+/* General page styling */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+    color: #333;
 }
 
-/* Heading */
+/* Title */
 h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+    text-align: center;
+    color: #222;
+}
+
+/* Form area */
+div {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 0 auto 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+    width: 90%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+/* Add button */
+button {
+    background-color: #0078d7;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005ea6;
 }
 
 /* Table styling */
 table {
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-  border-collapse: collapse;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-thead {
-  background-color: #4CAF50;
-  color: white;
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 th, td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
-  text-align: center;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-tbody tr:hover {
-  background-color: #f1f1f1;
+th {
+    background-color: #f0f0f0;
 }
 
-/* Buttons */
-button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+/* Action buttons in table */
+td button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-button.delete {
-  background-color: #e74c3c;
-  color: white;
-}
-
-button.edit {
-  background-color: #3498db;
-  color: white;
-}
-
-button:hover {
-  opacity: 0.9;
+td button:hover {
+    background-color: #c0392b;
 }
