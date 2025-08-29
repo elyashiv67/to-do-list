@@ -7,6 +7,9 @@ const port = 4365 ;
 let nextId = 1;
 const tasks = [];
 
+app.use(express.static(__dirname));
+
+
 app.use(express.json());
 
 app.get('/',(req,res)=>{
