@@ -17,8 +17,13 @@ function creatTable(arr){
         // line += `<td>${item.task}</td>`;
         // line += `<td>${item.description}</td>`;
         for(let index in item){
-            if(index === "isDone") continue;
+            if(index == "isDone") continue;
             line += `<td>${item[index]}</td>`;
+        }
+        if(item.isDone){
+         line += `<td><input type="checkbox" id="isDone${id}" onclick="isDone(${item.id})" checked></td>`;   
+        }else{
+            line += `<td><input type="checkbox" id="isDone${id}" onclick="isDone(${item.id})"></td>`;
         }
         line += `<td><button onclick="deleteRow(${item.id})"> 🗑 </button></td>`;
         line += `<td><button onclick="editTask(${item.id})"> ✏ </button></td>`;
@@ -109,6 +114,16 @@ function btnChoose(){
     }else{
         BtnEdit();
 
+    }
+}
+
+async function isDone(id){
+    try{
+let response = await fetch(`/update/${id}`,{
+    method:"PATCH"
+});
+    }catch(err){
+        alert(err)
     }
 }
 

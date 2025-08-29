@@ -32,7 +32,6 @@ app.post("/add",(req,res)=>{
         //במערך הזה INDEX תמיד יהיה  ID פה אני בעצם מוודא שה 
         //וככה בעתיד יהיה לי יותר קל למצוא משימה מאשר כל פעם לרוץ על כל המערך
         //זו הדרך המקצועית
-        console.log(task);
         res.json({message:"ok the task has added"});
     
 
@@ -62,10 +61,10 @@ app.patch("/update",(req,res)=>{
     }
     //פה אני בעצם מקבל מהצד לקוח משתנה בוליאני ועל פיו אני משנה והוא 
     // יכול להיות לא מוגדר רק אם הוא לא שלח לי כלום ולכן אני לא יעשה כלום
-    let isDone = req.body.isDone;
-    if(isDone != undefined){
-        tasks[id].isDone = isDone;
-    }
+    // let isDone = req.body.isDone;
+    // if(isDone != undefined){
+    //     tasks[id].isDone = isDone;
+    // }
     let task = req.body.task;
     if(task){
         tasks[id].task = task;
@@ -78,7 +77,14 @@ app.patch("/update",(req,res)=>{
 });
 
 
-
+app.patch("/update/:id",(req,res)=>{
+    let id = req.params.id;
+    if(tasks[id] == null || id >= tasks.length){
+        return res.json({message:"id is not valid"});
+    };
+tasks[id].isDone = !tasks[id].isDone;
+res.json({message:"yes"});
+});
 
 
 app.listen(port,()=>{console.log(`http://localhost:${port}`);})
