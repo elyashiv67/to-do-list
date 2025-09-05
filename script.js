@@ -10,21 +10,20 @@ async function getData(){
 function creatTable(arr){
     
     let line = "";
+    let lineNum = 1;
     for(let item of arr){
         if(item != null){
-            line += "<tr>";
-        // line += `<td>${item.id}</td>`;
-        // line += `<td>${item.task}</td>`;
-        // line += `<td>${item.description}</td>`;
-        for(let index in item){
-            if(index == "isDone") continue;
-            line += `<td>${item[index]}</td>`;
-        }
-        if(item.isDone){
-         line += `<td><input type="checkbox" id="isDone${id}" onclick="isDone(${item.id})" checked></td>`;   
-        }else{
-            line += `<td><input type="checkbox" id="isDone${id}" onclick="isDone(${item.id})"></td>`;
-        }
+            let doneClass = item.isDone ? 'class="done"' : '';
+            let isChecked = item.isDone ? 'checked' : '';
+            line += `<tr>`;
+        line += `<td>${lineNum++}</td>`;
+        line += `<td ${doneClass}>${item.task}</td>`;
+        line += `<td ${doneClass}>${item.description}</td>`;
+        // for(let index in item){
+        //     if(index == "isDone") continue;
+        //     line += `<td>${item[index]}</td>`;
+        // }
+        line += `<td><input type="checkbox" id="isDone${id}" onclick="isDone(${item.id})" ${isChecked}></td>`;   
         line += `<td><button onclick="deleteRow(${item.id})"> 🗑 </button></td>`;
         line += `<td><button onclick="editTask(${item.id})"> ✏ </button></td>`;
 
@@ -56,7 +55,7 @@ async function addToData(){
 
 document.getElementById('add').addEventListener("click",btnChoose);
 
-getData();
+window.onload = getData();
 
 
 async function deleteRow(id){
@@ -122,8 +121,16 @@ async function isDone(id){
 let response = await fetch(`/update/${id}`,{
     method:"PATCH"
 });
+   getData();
     }catch(err){
         alert(err)
     }
 }
 
+async function search() {
+    let sorted = tasks;
+    let text = document.getElementById('search').value;
+    sorted = sorted.filter(o=>o && o.task.includes(text));
+}
+
+document.getElementById('search').addEventListener("input",search);

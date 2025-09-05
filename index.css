@@ -109,3 +109,6 @@ td button.edit {
 td button.edit:hover {
     background-color: #d68910;
 }
+.done{
+    text-decoration: line-through;
+}
